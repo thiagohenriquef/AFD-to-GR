@@ -1,6 +1,6 @@
 GR	#identifica o tipo de formalismo
 3	#numero de variaveis
-2	numero de simbolos terminais(sem incluir palavra vazia('&'))
+2	#numero de simbolos terminais(sem incluir palavra vazia('&'))
 1	#numero de producoes da variavel 0
 a	#terminal para producao 1 da variavvel 0
 A	#variavel para producao 1 da variavel 0
