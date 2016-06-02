@@ -8,7 +8,7 @@ import java.io.*;
  * @author thiago
  */
 public class TelaPrincipal {
-    String pastaPrincipal = "/home/thiago/";
+    String pastaPrincipal = "src\\Arquivos\\afd.txt";
     String nomeArq;
     Scanner entrada = new Scanner(System.in);
     Arquivo arq = new Arquivo();
