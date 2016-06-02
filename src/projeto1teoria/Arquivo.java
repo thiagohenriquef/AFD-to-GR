@@ -1,11 +1,8 @@
 package projeto1teoria;
 
 import java.io.*;
-import sun.misc.IOUtils;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -13,6 +10,7 @@ import java.util.logging.Logger;
  */
 public class Arquivo {
     ArrayList<String> afd = new ArrayList();
+    Scanner entrada = new Scanner(System.in);
     
     public Arquivo() {
     }
@@ -24,49 +22,22 @@ public class Arquivo {
             while(entrada.hasNextLine()){
                 afd.add(entrada.nextLine());
             }
-            
             return afd;
-            /*for(String str : afd){
-                System.out.println(str);
-            }*/
         } catch (Exception e) {
-            System.err.println(e);
+            System.err.println(e.getMessage());
         }
         return null;
     }
-    /*public String lerArquivo(String nomeArq) {
-        try{
-            BufferedReader buffer = new BufferedReader(new FileReader(nomeArq));
-            String linha = "";
-            
-            while(true){
-                if(linha != null){
-                    System.out.println(linha);
-                }else{
-                    break;
-                }
-                
-                linha = buffer.readLine();
-                
-                buffer.close();
-                return linha;
-            }
-        }    
-        catch(Exception e){
-            System.err.println(e.getMessage());
-            }
-        return null;
-    }*/
     
     
-    public void escreveArquivo(String nomeArq){
+    public void escreveArquivo(String nomeArq, ArrayList array){
         try{
             FileWriter arq = new FileWriter(nomeArq);
             PrintWriter gravarArq = new PrintWriter(arq);
             
-            gravarArq.printf("Gravando no arquivo");
-            
-            
+            for(int i = 0; i< array.size(); i++){
+                gravarArq.println(array.get(i));
+            }
             arq.close();
         }
         catch(Exception e){
