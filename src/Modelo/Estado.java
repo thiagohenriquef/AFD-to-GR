@@ -5,22 +5,19 @@ package Modelo;
  * @author Thiago
  */
 public class Estado {
-    private int id;
     private String name;
-    private String rotulo;
+    private boolean estadoFinal;
 
-    public Estado(int id) {
-        this.id = id;
+    public Estado(String name, boolean estadoFinal) {
+        this.name = name;
+        this.estadoFinal = estadoFinal;
     }
 
-    public int getId() {
-        return id;
+    public Estado() {
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
+    
+    
     public String getName() {
         return name;
     }
@@ -29,14 +26,11 @@ public class Estado {
         this.name = name;
     }
 
-    public String getRotulo() {
-        return rotulo;
+    public boolean isEstadoFinal() {
+        return estadoFinal;
     }
 
-    public void setRotulo(String rotulo) {
-        this.rotulo = rotulo;
+    public void setEstadoFinal(boolean estadoFinal) {
+        this.estadoFinal = estadoFinal;
     }
-    
-    
-    
 }

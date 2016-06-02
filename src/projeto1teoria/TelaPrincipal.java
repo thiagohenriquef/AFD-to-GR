@@ -1,5 +1,6 @@
 package projeto1teoria;
 
+import Automato.*;
 import Modelo.*;
 import java.util.Scanner;
 import java.io.*;
@@ -21,14 +22,22 @@ public class TelaPrincipal {
         nomeArq = entrada.nextLine();
         arquivo = arq.lerArquivo(pastaPrincipal+nomeArq);
         
-        for(String str : arquivo){
+        if(arquivo.get(0).equals("AFD")){
+            //System.out.println("é um afd");
+            GeraAutomato.leitura(arquivo);
+        }
+        if(arquivo.get(0).equals("GR")){
+            System.out.println("é uma gr");
+        }
+        
+        /*for(String str : arquivo){
                 System.out.println(str);
             }
         
         System.out.print("Digite o nome do arquivo de entrada a ser a ser gravado: "+pastaPrincipal);
         nomeArq = entrada.nextLine();
         arq.escreveArquivo(pastaPrincipal+nomeArq, arquivo);
-               
+        */       
     }
     
 }

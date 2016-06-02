@@ -15,6 +15,7 @@ public class Transicao {
         this.simbolo = simbolo;
     }
 
+
     public Estado getOrigem() {
         return origem;
     }
