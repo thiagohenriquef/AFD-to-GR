@@ -1,13 +1,14 @@
-AFD	#identifica o tipo de formalismo
-4	#quantidade de estados
-2	#quantidade de simbolos terminais
-1	#funçao de transiçao (q0,a)=q1
-2	#funçao de transiçao (q0,b)=q2
-3	#funçao de transiçao (q1,a)=q3
-2	#funçao de transiçao (q1,b)=q2
-1	#funçao de transiçao (q2,a)=q1
-3	#funçao de transiçao (q2,b)=q3
--1	#funçao de transiçao (q3,b)=indefinida
-0	#estado inicial (q0)
-1	#quantidade de estados finais
-3	#estado(s) final(is)
+AFD
+4
+2
+0 a 1
+0 b 2
+1 a 3
+1 b 2
+2 a 1
+2 b 3
+3 a 3
+3 b -1
+0
+1
+3
