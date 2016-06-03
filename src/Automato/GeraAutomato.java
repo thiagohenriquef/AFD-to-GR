@@ -47,7 +47,7 @@ public class GeraAutomato {
             if(count==primeiro){
                 valorIni = true;
             }
-            Estado e = new Estado("q"+count, valorIni, valorFim);
+            Estado e = new Estado(Integer.toString(count), valorIni, valorFim);
             est.add(e);
             
             valorFim = false;

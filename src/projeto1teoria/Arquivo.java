@@ -10,7 +10,6 @@ import java.util.Scanner;
  */
 public class Arquivo {
     ArrayList<String> afd = new ArrayList();
-    Scanner entrada = new Scanner(System.in);
     
     public Arquivo() {
     }
@@ -30,11 +29,12 @@ public class Arquivo {
     }
     
     
-    public void escreveArquivo(String nomeArq, ArrayList array){
+    public void escreveArquivo(String nomeArq, ArrayList array, String tipo){
         try{
             FileWriter arq = new FileWriter(nomeArq, true);
             PrintWriter gravarArq = new PrintWriter(arq);
             
+            gravarArq.println(tipo);
             for(int i = 0; i< array.size(); i++){
                 gravarArq.println(array.get(i));
             }

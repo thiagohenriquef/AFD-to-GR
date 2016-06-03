@@ -1,11 +1,8 @@
 package Gramatica;
 
 import Automato.GeraAutomato;
-import Modelo.Automato;
-import Modelo.Estado;
-import Modelo.Transicao;
-import java.util.ArrayList;
-import java.util.List;
+import Modelo.*;
+import java.util.*;
 import projeto1teoria.Arquivo;
 
 /**
@@ -16,42 +13,52 @@ public class GeraGramatica {
     String valores = "GR\t#tipo de formalismo" ;
     Arquivo arq = new Arquivo();
     GeraAutomato gerAut = new GeraAutomato();
+    Gramatica gramatica = new Gramatica();
     String S;
     int contador = 0;
+    ArrayList<String> array = new ArrayList();
+    
     public GeraGramatica() {
     }
     
     public void CriaGramatica(Automato aut, String dir, int simbolos){
-        String file = dir+"grteste.txt";
-        /*for(Transicao tran : aut.getTransicao()){
-            System.out.println(tran.getOrigem().getName()+"\t"+tran.getSimbolo()+"\t"+tran.getDestino().getName());
-        }*/
+        String file = dir+"afd_para_gr.txt";
+        int numTrans = aut.getTransicao().size();
+        int numEst = aut.getEstado().size();
+        ArrayList<String> varProducao = new ArrayList();
+        ArrayList<String> varTerminal = new ArrayList();
+        
         arq.escreveArquivo(file, valores);
         
         String estadoInicial = estadoInicial(aut);
         String estadoFinal = estadoFinal(aut);
         int contaSimbolos = simbolos;
         
-        arq.escreveArquivo(file, aut.getEstado().size()+"\t#Numero de variaveis");
+        arq.escreveArquivo(file, numEst+"\t#Numero de variaveis");
         arq.escreveArquivo(file, contaSimbolos+"\t#Numero de simbolos terminais");
         
-        contador = 0;
-        for(int i = 0; i < aut.getTransicao().size(); i++){
-            if(aut.getTransicao().get(i).getOrigem().getName().equals("q"+i)){
-                contador++;
+        for(Transicao t: aut.getTransicao()){
+            String prod = t.getSimbolo()+t.getDestino().getName();
+            
+            if(t.getDestino().isEstadoInicial()){
+                    varProducao.set(0, t.getSimbolo());
+                    varProducao.add(t.getOrigem().getName()+"->"+prod);
+                }
+            else if(t.getDestino().getName().equals("ind")){
+                varProducao.add(t.getOrigem().getName()+"->"+t.getSimbolo()+"%");
             }
-        }
-        
-        
-        
-        //System.out.println(contador);
-        
-        //checa se é estado final e incrementa uma palavra vazia na string
-        for(Estado est: aut.getEstado()){
-            if(est.isEstadoFinal()){
-                valores += "&";
+            else if(t.getOrigem().isEstadoFinal()){
+                varProducao.add(t.getOrigem().getName()+"->"+t.getSimbolo()+"&");
+                
+            }else{
+                varTerminal.add(t.getSimbolo());
+                varProducao.add(t.getOrigem().getName()+"->"+prod);
             }
-        }
+            
+            }
+        
+        arq.escreveArquivo(file, varTerminal, "#variaveis terminais");
+        arq.escreveArquivo(file, varProducao, "#variaveis de producao");
     }
     
     public String estadoInicial(Automato aut){

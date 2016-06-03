@@ -1,0 +1,19 @@
+GR	#tipo de formalismo
+4	#Numero de variaveis
+2	#Numero de simbolos terminais
+#variaveis terminais
+a
+b
+a
+b
+a
+b
+#variaveis de producao
+0->a1
+0->b2
+1->a3
+1->b2
+2->a1
+2->b3
+3->a&
+3->b%
