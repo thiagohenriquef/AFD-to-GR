@@ -32,7 +32,7 @@ public class Arquivo {
     
     public void escreveArquivo(String nomeArq, ArrayList array){
         try{
-            FileWriter arq = new FileWriter(nomeArq);
+            FileWriter arq = new FileWriter(nomeArq, true);
             PrintWriter gravarArq = new PrintWriter(arq);
             
             for(int i = 0; i< array.size(); i++){
@@ -44,5 +44,20 @@ public class Arquivo {
             System.err.println(e.getMessage());
         }
     }
+    
+    public void escreveArquivo(String nomeArq, String nome){
+        try{
+            FileWriter arq = new FileWriter(nomeArq, true);
+            PrintWriter gravarArq = new PrintWriter(arq);
+            
+            gravarArq.println(nome);
+            
+            arq.close();
+        }
+        catch(Exception e){
+            System.err.println(e.getMessage());
+        }
+    }
+    
       
 }

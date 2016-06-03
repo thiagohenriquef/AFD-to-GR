@@ -7,10 +7,12 @@ package Modelo;
 public class Estado {
     private String name;
     private boolean estadoFinal;
+    private boolean estadoInicial;
 
-    public Estado(String name, boolean estadoFinal) {
+    public Estado(String name, boolean estadoInicial, boolean estadoFinal) {
         this.name = name;
         this.estadoFinal = estadoFinal;
+        this.estadoInicial = estadoInicial;
     }
 
     public Estado() {
@@ -33,4 +35,14 @@ public class Estado {
     public void setEstadoFinal(boolean estadoFinal) {
         this.estadoFinal = estadoFinal;
     }
+
+    public boolean isEstadoInicial() {
+        return estadoInicial;
+    }
+
+    public void setEstadoInicial(boolean estadoInicial) {
+        this.estadoInicial = estadoInicial;
+    }
+    
+    
 }

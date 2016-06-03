@@ -10,43 +10,53 @@ import java.util.Scanner;
  * @author Thiago
  */
 public class GeraAutomato {
-    Automato aut = new Automato();
-    static ArrayList<Estado> est = new ArrayList();
-    static ArrayList<Transicao> trans = new ArrayList();
-    static String nome;
-    static Estado nulo = new Estado("ind", false);
+    ArrayList<Estado> est = new ArrayList();
+    ArrayList<Transicao> trans = new ArrayList();
+    String nome;
+    Estado nulo = new Estado("ind", false, false);
+    private int quantSimbolos;
     
     public GeraAutomato() {
     }
     
-    public static ArrayList<Transicao> leitura(ArrayList<String> array){
-        //System.out.println(array.get(0));
-        boolean valor = false;
+    public Automato leitura(ArrayList<String> array){
+        boolean valorIni = false;
+        boolean valorFim = false;
         
-        int numEstados = Integer.parseInt(array.get(1));
-        int numTerminais = Integer.parseInt(array.get(2));
+        int numEstados = converteInteiro(array.get(1));
+        int numTerminais = converteInteiro(array.get(2));
         
-        //System.out.println(array.get(1));
-        //System.out.println(array.get(2));
+        int quantEstados = converteInteiro(array.get(array.size()-2));
+        int vetorEstadosFinais[] = new int[quantEstados];
+        
+        int quant = 0;
+        while(quant < quantEstados){
+            String s = Character.toString(array.get(array.size()-1).charAt(quant));
+            vetorEstadosFinais[quant] = converteInteiro(s);
+            quant++;
+        }
         
         int contador = 3;
-        
         for(int count = 0; count < numEstados; count++){
-            int ultimo = Integer.parseInt(array.get(array.size()-1));
-            if(count==ultimo){
-                    valor = true;
+            int ultimo = converteInteiro(array.get(array.size()-1));
+            int primeiro = converteInteiro(array.get(array.size()-3));
+            
+            if(verificaFim(vetorEstadosFinais, count)){
+                    valorFim = true;
             }
-            Estado e = new Estado("q"+count, valor);
+            if(count==primeiro){
+                valorIni = true;
+            }
+            Estado e = new Estado("q"+count, valorIni, valorFim);
             est.add(e);
-            //System.out.println(e.getName());
-            //System.out.print(e.isEstadoFinal());
- 
+            
+            valorFim = false;
+            valorIni = false;
         }
         
         for(int i=0; i<numEstados; i++){               
             for(int j=0; j<numTerminais; j++){
-                int value = Integer.parseInt(array.get(contador));            
-                
+                int value = converteInteiro(array.get(contador));          
                 switch(j){
                     case 0:
                         nome = "a";
@@ -65,23 +75,46 @@ public class GeraAutomato {
                         break;
                 }
                 
+                this.setQuantSimbolos(j+1);
+                
                 if(value==-1){
-                    Transicao t = new Transicao(est.get(i), GeraAutomato.nulo, nome);
+                    Transicao t = new Transicao(est.get(i), this.nulo, nome);
                     trans.add(t);
                 }
                 else{    
                     Transicao t = new Transicao(est.get(i), est.get(value), nome);
                     trans.add(t);
                 }
-                
                 contador++;
             }
         }
         
-        for(Transicao arr : trans){
-            System.out.println(arr.getOrigem().getName()+"   "+arr.getDestino().getName()+"    "+arr.getSimbolo());
-        }
-        
-        return trans;
+        Automato aut = new Automato(est, trans);
+        return aut;
+    }
+    
+    public static int converteInteiro(String palavra){
+        int numero;
+        numero = Integer.parseInt(palavra);
+        return numero;
+    }
+    
+    public static boolean verificaFim(int vetor[], int x){
+        int i=0;
+        while(i<vetor.length){
+            if(x==vetor[i]){
+                return true;
+            }
+            i++;
+        }        
+        return false;
+    }
+
+    public int getQuantSimbolos() {
+        return quantSimbolos;
+    }
+
+    public void setQuantSimbolos(int quantSimbolos) {
+        this.quantSimbolos = quantSimbolos;
     }
 }

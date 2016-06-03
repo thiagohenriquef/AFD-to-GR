@@ -10,7 +10,9 @@ public class Automato {
     private ArrayList<Estado> estado;
     private ArrayList<Transicao> transicao;
 
-    public Automato() {
+    public Automato(ArrayList<Estado> estado, ArrayList<Transicao> transicao) {
+        this.estado = estado;
+        this.transicao = transicao;
     }
 
     public ArrayList<Estado> getEstado() {
