@@ -22,20 +22,21 @@ public class TelaPrincipal {
     GeraAutomato gerAut = new GeraAutomato();
     
     
-    public TelaPrincipal() {     
+    public TelaPrincipal() {
         String so = System.getProperty("os.name");
         if(so.equals("Linux")){
             pastaPrincipal = "src/Arquivos/";
         }
         
-        arquivo = arq.lerArquivo(pastaPrincipal+/*nomeArq*/"afd.txt");
+        arquivo = arq.lerArquivo(pastaPrincipal+"afd.txt");
         if(arquivo.get(0).equals("AFD")){
             aut = gerAut.leitura(arquivo);
             int i = gerAut.getQuantSimbolos();
-            ger.CriaGramatica(aut, pastaPrincipal, i);    
+            ger.CriaGramatica(aut, pastaPrincipal, i);
+            System.out.println("Gramática e regras de transição criados em "+pastaPrincipal);
         }
         if(arquivo.get(0).equals("GR")){
-            //System.out.println("é uma gr");
+            System.out.println("é uma gr");
         }
     }
     
