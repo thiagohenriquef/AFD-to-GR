@@ -10,8 +10,8 @@ import java.io.*;
 public class Projeto1Teoria {
 
     
-    public static void main(String[] args) {
-        TelaPrincipal tel = new TelaPrincipal();
+    public static void main(String[] args) throws FileNotFoundException {
+        TelaPrincipal tel = new TelaPrincipal(args);
     }
     
 }

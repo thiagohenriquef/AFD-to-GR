@@ -1,38 +1,78 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Modelo;
+
+import java.util.Objects;
 
 /**
  *
- * @author Thiago
+ * @author thiago
  */
 public class Gramatica {
-    private Producao producao;
-    private Terminal terminal;
-    private Variavel variavel;
+    private String ladoEsq;
+    private String ladoDir;
 
     public Gramatica() {
     }
 
-    public Producao getProducao() {
-        return producao;
+    public Gramatica(String ladoEsq, String ladoDir) {
+        this.ladoEsq = ladoEsq;
+        this.ladoDir = ladoDir;
     }
 
-    public void setProducao(Producao producao) {
-        this.producao = producao;
+    public String getLadoEsq() {
+        return ladoEsq;
     }
 
-    public Terminal getTerminal() {
-        return terminal;
+    public void setLadoEsq(String ladoEsq) {
+        this.ladoEsq = ladoEsq;
     }
 
-    public void setTerminal(Terminal terminal) {
-        this.terminal = terminal;
+    public String getLadoDir() {
+        return ladoDir;
     }
 
-    public Variavel getVariavel() {
-        return variavel;
+    public void setLadoDir(String ladoDir) {
+        this.ladoDir = ladoDir;
     }
 
-    public void setVariavel(Variavel variavel) {
-        this.variavel = variavel;
+    @Override
+    public String toString() {
+        return ladoEsq+"->"+ladoDir;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Gramatica other = (Gramatica) obj;
+        if (!Objects.equals(this.ladoEsq, other.ladoEsq)) {
+            return false;
+        }
+        if (!Objects.equals(this.ladoDir, other.ladoDir)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
+    
+    
 }

@@ -1,6 +1,5 @@
 package projeto1teoria;
 
-import Automato.*;
 import Gramatica.GeraGramatica;
 import Modelo.*;
 import java.util.Scanner;
@@ -12,32 +11,48 @@ import java.util.ArrayList;
  * @author thiago
  */
 public class TelaPrincipal {
-    ArrayList<String> arquivo = new ArrayList();
-    Automato aut;
-    String pastaPrincipal = "src\\Arquivos\\";
-    String nomeArq;
-    Scanner entrada = new Scanner(System.in);
+    private static ArrayList<Gramatica> gra = new ArrayList<Gramatica>();
+    private static ArrayList<Automato> tra = new ArrayList<Automato>();
     Arquivo arq = new Arquivo();
     GeraGramatica ger = new GeraGramatica();
-    GeraAutomato gerAut = new GeraAutomato();
+    public static String alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
-    
-    public TelaPrincipal() {
-        String so = System.getProperty("os.name");
-        if(so.equals("Linux")){
-            pastaPrincipal = "src/Arquivos/";
-        }
+    public TelaPrincipal(String[] arg) throws FileNotFoundException {
+        Scanner entrada = new Scanner(new FileReader(arg[0]));
         
-        arquivo = arq.lerArquivo(pastaPrincipal+"afd.txt");
-        if(arquivo.get(0).equals("AFD")){
-            aut = gerAut.leitura(arquivo);
-            int i = gerAut.getQuantSimbolos();
-            ger.CriaGramatica(aut, pastaPrincipal, i);
-            System.out.println("Gramática e regras de transição criados em "+pastaPrincipal);
+        String s = arq.lerFormalismo(entrada);
+        if(s.equals("AFD")){
+            tra = arq.leAutomato(entrada);
+            tra = arq.leEstadoInicialeFinal(entrada, tra);
+            
+            gra = ger.CriaGramatica(tra);
+            
+            arq.gravaArquivo(gra);
+            for(Gramatica g : gra){
+                System.out.println(g);
+            }
+            /*for(Automato t : tra ){
+                System.out.println(t);
+            }*/
         }
-        if(arquivo.get(0).equals("GR")){
-            System.out.println("é uma gr");
-        }
-    }
+        //System.out.println(s);
     
+    }
+
+    public static ArrayList<Automato> getTra() {
+        return tra;
+    }
+
+    public static void setTra(ArrayList<Automato> tra) {
+        TelaPrincipal.tra = tra;
+    }
+ 
+    
+    public static ArrayList<Gramatica> getGra() {
+        return gra;
+    }
+
+    public static void setGra(ArrayList<Gramatica> aGra) {
+        gra = aGra;
+    }
 }
